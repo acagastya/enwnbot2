@@ -63,7 +63,7 @@ function streamMessage(event) {
   let msg = "";
   const change = JSON.parse(event.data);
   const { comment, title, type, user } = change;
-  if (change.wiki == wiki && type == "categirize") {
+  if (change.wiki == wiki && type == "categorize") {
     const category = getCategory(title);
     const pageRegex = /\[\[:(.*)\]\]/;
     const page = comment.match(pageRegex)[1];

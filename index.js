@@ -113,7 +113,7 @@ async function announceUR(sender, channel) {
     if (!list.length)
       ircClient.say(channel, `No articles are under review, ${sender}.`);
     else {
-      client.say(
+      ircClient.say(
         channel,
         `${list.length} articles are under review, ${sender}.  They are:`
       );
