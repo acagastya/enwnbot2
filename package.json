@@ -1,0 +1,23 @@
+{
+  "name": "enwnbot",
+  "version": "0.0.1",
+  "description": "Does what gpy does",
+  "main": "index.js",
+  "repository": "https://github.com/acagasyta/enwnbot2",
+  "author": {
+    "name": "Agastya",
+    "email": "me@hanabi.in",
+    "url": "https://hanabi.in"
+  },
+  "license": "BSD-3-Clause",
+  "private": true,
+  "dependencies": {
+    "eventsource": "^1.0.7",
+    "irc": "^0.5.2",
+    "moment-timezone": "^0.5.31",
+    "node-fetch": "^2.6.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}
