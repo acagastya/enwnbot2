@@ -95,7 +95,7 @@ function streamMessage(event) {
       case "Peer reviewed/Not ready": {
         const failedArticleRegex = /^\[\[:Talk:(.*)\]\]/;
         const failedArticle = comment.match(failedArticleRegex)[1];
-        msg = `${user} failed the ${failedArticle} article.`;
+        msg = `${user} has not-ready'd the [[${failedArticle}]] article.`;
         break;
       }
       case "Abandoned": {
