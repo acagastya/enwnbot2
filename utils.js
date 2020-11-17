@@ -98,6 +98,12 @@ function streamMessage(event) {
         msg = `${user} has not-ready'd the [[${failedArticle}]] article.`;
         break;
       }
+      case "Disputed": {
+        const failedArticleRegex = /^\[\[:(.*)\]\]/;
+        const failedArticle = comment.match(failedArticle)[1];
+        if (comment.includes("added")) msg = `${user} has not-ready'd the [[${failedArticle}]] article.`;
+        break;
+      }
       case "Abandoned": {
         if (comment.includes("added"))
           msg = `${user} has marked [[${page}]] as abandoned.`;
