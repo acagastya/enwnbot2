@@ -100,7 +100,7 @@ function streamMessage(event) {
       }
       case "Disputed": {
         const failedArticleRegex = /^\[\[:(.*)\]\]/;
-        const failedArticle = comment.match(failedArticle)[1];
+        const failedArticle = comment.match(failedArticleRegex)[1];
         if (comment.includes("added")) msg = `${user} has not-ready'd the [[${failedArticle}]] article.`;
         break;
       }
