@@ -93,13 +93,13 @@ function streamMessage(event) {
         break;
       }
       case "Peer reviewed/Not ready": {
-        const failedArticleRegex = /^\[\[:Talk:(.*)\]\]/;
+        const failedArticleRegex = /^\[\[:Talk:([^\]\]]*)\]\]/;
         const failedArticle = comment.match(failedArticleRegex)[1];
         msg = `${user} has not-ready'd the [[${failedArticle}]] article.`;
         break;
       }
       case "Disputed": {
-        const failedArticleRegex = /^\[\[:(.*)\]\]/;
+        const failedArticleRegex = /^\[\[:Talk:([^\]\]]*)\]\]/;
         const failedArticle = comment.match(failedArticleRegex)[1];
         if (comment.includes("added")) msg = `${user} has not-ready'd the [[${failedArticle}]] article.`;
         break;
