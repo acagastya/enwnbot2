@@ -100,8 +100,9 @@ function streamMessage(event) {
       }
       case "Disputed": {
         const failedArticleRegex = /^\[\[:Talk:([^\]\]]*)\]\]/;
-        const failedArticle = comment.match(failedArticleRegex)[1];
-        if (comment.includes("added")) msg = `${user} has not-ready'd the [[${failedArticle}]] article.`;
+        const maybeMatch = comment.match(failedArticleRegex);
+        const failedArticle  = maybeMatch[1];
+        if (comment.includes("added") && failedArticle) msg = `${user} has not-ready'd the [[${failedArticle}]] article.`;
         break;
       }
       case "Abandoned": {
