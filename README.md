@@ -1,4 +1,5 @@
-Converts MediaWiki [[links]] and {{templates}} to links.
+<!-- adapted from https://github.com/acagastya/enwnbot/blob/master/README.md -->
+Converts MediaWiki [[links]] and {{templates}} to links, informs important events from wiki, handles announces review queue, and under review, and handles when they last saw a given user.
 
 # Installation
 
@@ -12,31 +13,34 @@ yarn start # or `npm run start`
 
 # Configuration
 
-Use the `config.js` to configure the bot.
+Use the `config.js` to configure the bot.  It expects the following variables:
 
-- Specify the bot's IRC nick in `botName`. (eg. `linkBot`)
-- Mention the list of channels to monitor in `channels`.
-- Specify IRC channel in `server`. (eg. `irc.freenode.net`)
-- API should be specified in `URL`. (eg. `https://en.wikinews.org/w/index.php?title=`)
-
-Additionally, the bot reports any errors to its maintainers.
-
-- Mention the list of maintainers in the `maintainers` array.
-- PM to the bot will not be forwarded to anyone, unless it starts with a particular string mentioned in `report`. If the bot gets a PM which starts with `report`, it will forward the PM to a list of admins. **Note:** This could be abused, so specifying `report` as `/` might be a good idea.
-- Specify the list of admins who would like to receive PM of the forwarded message in `admins`.
+- `channels`: the channels the bot should join.
+- `ircBotName`: IRC username of the bot.
+- `ircServer`: IRC server.
+- `RCAPI`: Wiki's stream for recent changes.
+- `RQAPI`: API endpoint to get review queue.
+- `URAPI`: API endpoint to get under review articles.
+- `URL`:  This is URL of a wiki page sans the title.  (see below)
+- `wiki`: the wiki identifier used to filter the recent changes stream.
 
 Sample `config.js` looks like:
 
 ```js
-const config = {
-  admins: ['jdoe', 'samsmith'],
-  botName: 'linkBot',
-  channels: ['#foo', '##bar'],
-  maintainers: ['list', 'of', 'maintainers'],
-  report: '!ADMIN',
-  server: 'irc.freenode.net',
-  URL: 'https://en.wikinews.org/w/index.php?title=',
+module.exports = {
+  channels: ["#my-wiki-channel", "##wiki-informal-channel"],
+  ircBotName: "wikilinkbot",
+  ircServer: "chat.freenode.net",
+  RCAPI: "https://stream.wikimedia.org/v2/stream/recentchange",
+  RQAPI: "https://en.wikinews.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Review&format=json&cmsort=timestamp&cmprop=timestamp|ids|title",
+  URAPI: "https://en.wikinews.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Under%20review&format=json&cmsort=timestamp&cmprop=title|timestamp",
+  URL: "https://en.wikinews.org/w/index.php?title=",
+  wiki: "enwikinews"
 };
 ```
 
 **Note:** In case if you do not want the wikilinks and templates in your message to be be announced by the bot, add `--ignore` at the end of the message.
+
+To access Review Queue, and articles under review, send this message in the channel: `<ircBotName> !RQ` and `<ircBotName> !UR` respectively.
+
+To find when was a user last active in a channel, send `@seen <username>` in that channel.
