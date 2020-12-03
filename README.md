@@ -39,4 +39,4 @@ const config = {
 };
 ```
 
-**Note:** In case if your message contains templates and you don't want the bot to announce the link -- add `--nl` at the end of the message.
+**Note:** In case if you do not want the wikilinks and templates in your message to be be announced by the bot, add `--ignore` at the end of the message.
